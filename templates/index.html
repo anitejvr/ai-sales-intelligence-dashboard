@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Sales Summarizer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>AI Sales Call Summarizer</h1>
+
+<form method="POST">
+    <textarea
+        name="transcript"
+        rows="12"
+        placeholder="Paste transcript here..."
+    ></textarea>
+
+    <br><br>
+
+    <button type="submit">Analyze Call</button>
+</form>
+
+{% if result %}
+
+<div class="grid">
+
+    <div class="card">
+        <h2>Summary</h2>
+        <p>{{ result.summary }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Deal Health</h2>
+
+        <p class="risk-pill 
+        {% if result.deal_risk == 'Low' %}risk-low
+        {% elif result.deal_risk == 'Medium' %}risk-medium
+        {% else %}risk-high{% endif %}">
+            {{ result.deal_risk }} RISK
+        </p>
+
+        <h3 style="margin-top: 15px;">Close Probability</h3>
+
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ result.probability_to_close }}%"></div>
+        </div>
+
+        <p>{{ result.probability_to_close }} / 100</p>
+    </div>
+
+    <div class="card">
+        <h2>Key Objections</h2>
+        <ul>
+            {% for objection in result.objections %}
+                <li>{{ objection }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Action Items</h2>
+        <ul>
+            {% for action in result.action_items %}
+                <li>{{ action }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Follow-Up Email</h2>
+
+        <button class="copy-btn" onclick="copyEmail()">📋 Copy Email</button>
+
+        <pre>{{ result.follow_up_email }}</pre>
+    </div>
+
+</div>
+
+<script>
+function copyEmail() {
+    const text = `{{ result.follow_up_email | safe }}`;
+    navigator.clipboard.writeText(text);
+    alert("Email copied to clipboard!");
+}
+</script>
+
+{% endif %}
+
+</body>
+</html>
