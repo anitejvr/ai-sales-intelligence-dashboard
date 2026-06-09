@@ -1,10 +1,20 @@
 # AI Sales Intelligence Dashboard
 
+## Live Demo
+
+https://your-app.onrender.com
+
 ## Overview
 
 AI Sales Intelligence Dashboard is a Flask-based web application that helps sales teams analyze customer conversations and generate actionable insights.
 
 The application uses OpenAI models to transform raw sales transcripts into structured intelligence that can help sales professionals prioritize opportunities and follow up more effectively.
+
+## Problem It Solves
+
+Sales teams spend significant time manually reviewing call transcripts, extracting key insights, and writing follow-ups. This process is inconsistent and time-consuming.
+
+This tool automates that workflow using AI, turning unstructured conversations into structured sales intelligence in seconds.
 
 ## Features
 
