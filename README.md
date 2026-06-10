@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-https://your-app.onrender.com
+https://ai-sales-intelligence-dashboard.onrender.com/
 
 ## Overview
 
